@@ -1,6 +1,12 @@
-div {
+.login-form {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     margin: 10px;
-    background-image: url('https://www.solidbackgrounds.com/images/2560x1440/2560x1440-pearl-aqua-solid-color-background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}
+
+.field-div {
+    margin: 10px 0px;
 }

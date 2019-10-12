@@ -4,7 +4,7 @@ import shortid from 'shortid';
 import AddFriendForm from '../AddFriendForm/AddFriendForm';
 import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth';
 import { Redirect } from 'react-router-dom';
-import './DisplayFriends'
+import './DisplayFriends.css'
 
 const DisplayFriends = (props) => {
     console.log(props)
@@ -20,9 +20,11 @@ const DisplayFriends = (props) => {
     }, [])
     return (
         <div className='friends-list'>
-            <h1>Friends</h1>
-            <AddFriendForm setFriends={setFriends}/>
             <div>
+                <h1>Friends</h1>
+                <AddFriendForm setFriends={setFriends}/>
+            </div>
+            <div className='friends'>
                 {friends.map(friend => <Friend key={shortid.generate()} friend={friend}/>)}
             </div>
         </div>

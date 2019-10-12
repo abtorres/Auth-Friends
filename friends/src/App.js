@@ -17,7 +17,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path='/' component={UserLoginForm} />
-          <PrivateRoute exact path='/friends' render={(props) => <DisplayFriends {...props}/>}/>
+          <PrivateRoute path='/friends' render={(props) => <DisplayFriends {...props}/>}/>
         </Switch>
       </div>
     </Router>

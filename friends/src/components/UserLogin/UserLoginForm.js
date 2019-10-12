@@ -7,16 +7,16 @@ import './UserLoginForm.css'
 function UserLoginForm({ errors, touched}) {
 
     return (
-        <Form>
+        <Form className='login-form'>
             <h1>Auth-Friends</h1>
             <p>Log In</p>
-            <div>
+            <div className='field-div'>
                 {touched.userName && errors.userName && <p>{errors.userName}</p>}
-                <Field className='field' type='text' name='userName' placeholder='User Name'/>
+                <Field className='login-field' type='text' name='userName' placeholder='User Name'/>
             </div>
-            <div>
+            <div className='field-div'>
                 {touched.userPassword && errors.userPassword && <p>{errors.userPassword}</p>}
-                <Field className='field' type='password' name='userPassword' placeholder='Password'/>
+                <Field className='login-field' type='password' name='userPassword' placeholder='Password'/>
             </div>
             <button type='submit'>Submit</button>
         </Form>

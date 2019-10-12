@@ -44,17 +44,12 @@ const AddFriendForm = withFormik({
     }),
 
     handleSubmit(values, { props }) {
-        // axios.post('http://localhost:5000/api/friends', {
-        //     name: values.name,
-        //     age: values.age,
-        //     email: values.email
-        // })
-        // .then(res => {
-        //     console.log(res)
-        // })
-        const newFriend = {name: values.name, age: parseInt(values.age), email: values.email}
+        console.log(props)
+        const newFriend = {name: values.name, age: parseInt(values.age), email: values.email};
+
         axiosWithAuth().post('/friends', newFriend)
         .then(res => {
+            console.log(res)
             props.setFriends(res.data)
         })
     }

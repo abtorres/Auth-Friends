@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route, 
+  Switch
+} from 'react-router-dom';
+
 import './App.css';
 import UserLoginForm from './components/UserLogin/UserLoginForm';
-import UserContext from './components/UserContext/UserContext';
-import AddFriendForm from './components/AddFriendForm/AddFriendForm'
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import DisplayFriends from './components/DisplayFriends/DisplayFriends';
+
 
 function App() {
-  const [authToken, setAuthToken] = useState({});
-
   return (
-    <div className="App">
-      <UserContext.Provider value={ {authToken, setAuthToken} }>
-        <UserLoginForm setToken={setAuthToken}/>
-        <AddFriendForm token={authToken}/>
-      </UserContext.Provider>
-    </div>
+    <Router>      
+      <div className="App">
+        <Switch>
+          <Route exact path='/' component={UserLoginForm} />
+          <PrivateRoute path='/friends' render={(props) => <DisplayFriends {...props}/>}/>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

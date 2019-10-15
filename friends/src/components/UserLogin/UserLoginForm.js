@@ -2,18 +2,21 @@ import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import './UserLoginForm.css'
 
 function UserLoginForm({ errors, touched}) {
 
     return (
-        <Form>
-            <div>
+        <Form className='login-form'>
+            <h1>Auth-Friends</h1>
+            <p>Log In</p>
+            <div className='field-div'>
                 {touched.userName && errors.userName && <p>{errors.userName}</p>}
-                <Field className='field' type='text' name='userName' placeholder='User Name'/>
+                <Field className='login-field' type='text' name='userName' placeholder='User Name'/>
             </div>
-            <div>
+            <div className='field-div'>
                 {touched.userPassword && errors.userPassword && <p>{errors.userPassword}</p>}
-                <Field className='field' type='password' name='userPassword' placeholder='Password'/>
+                <Field className='login-field' type='password' name='userPassword' placeholder='Password'/>
             </div>
             <button type='submit'>Submit</button>
         </Form>
@@ -21,11 +24,10 @@ function UserLoginForm({ errors, touched}) {
 }
 
 const FormikLoginForm = withFormik({
-    mapPropsToValues({ userName, userPassword, setToken }) {
+    mapPropsToValues({ userName, userPassword }) {
         return {
             userName: userName || "",
-            userPassword: userPassword || "",
-            setToken: setToken
+            userPassword: userPassword || ""
         };
     },
 
@@ -36,15 +38,14 @@ const FormikLoginForm = withFormik({
                 .required('Password is Required')
     }),
 
-    handleSubmit(values, { props }) {
-        console.log(props)
+    handleSubmit(values, {props}) {
         axios.post('http://localhost:5000/api/login', {
             username: values.userName,
             password: values.userPassword
         })
         .then(res => {
-            props.setToken(res.data.payload);
             localStorage.setItem('token', res.data.payload);
+            props.history.push('/friends')
         })
     }
 })(UserLoginForm)

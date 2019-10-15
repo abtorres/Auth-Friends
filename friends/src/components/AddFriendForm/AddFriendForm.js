@@ -2,23 +2,26 @@ import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth';
+import './AddFriendForm.css';
 
 function FriendForm({ errors, touched }) {
     return (
-        <Form>
-            <div>
+        <Form className='add-friend-form'>
+            <div className='field'>
                 {touched.name && errors.name && <p>{errors.name}</p>}
                 <Field className='field' type='text' name='name' placeholder='Name'/>
             </div>
-            <div>
+            <div className='field'>
                 {touched.age && errors.age && <p>{errors.age}</p>}
                 <Field className='field' type='number' name='age' placeholder='Age'/>
             </div>
-            <div>
+            <div className='field'>
                 {touched.email && errors.email && <p>{errors.email}</p>}
                 <Field className='field' type='email' name='email' placeholder='Email'/>
             </div>
-            <button type='submit'>Submit</button>
+            <div className='field'>
+                <button type='submit'>Submit</button>
+            </div>
         </Form>
     )
 }
@@ -43,22 +46,14 @@ const AddFriendForm = withFormik({
             .required()
     }),
 
-    handleSubmit(values) {
-        // axios.post('http://localhost:5000/api/friends', {
-        //     name: values.name,
-        //     age: values.age,
-        //     email: values.email
-        // })
-        // .then(res => {
-        //     console.log(res)
-        // })
-        axiosWithAuth.post('http://localhost:5000/api/friends', {
-            name: values.name,
-            age: values.age,
-            email: values.email
-        })
+    handleSubmit(values, { props }) {
+        console.log(props)
+        const newFriend = {name: values.name, age: parseInt(values.age), email: values.email};
+
+        axiosWithAuth().post('/friends', newFriend)
         .then(res => {
             console.log(res)
+            props.setFriends(res.data)
         })
     }
 })(FriendForm)

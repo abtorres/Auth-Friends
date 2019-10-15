@@ -1,0 +1,17 @@
+.friends-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.friends-list h1 {
+  text-align: center;
+}
+
+.friends {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  justify-content: space-evenly;
+}

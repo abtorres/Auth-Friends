@@ -1,0 +1,10 @@
+.add-friend-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    width: 50%;
+    align-self: center;
+    /* margin: 3px 0px; */
+}
